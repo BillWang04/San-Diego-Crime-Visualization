@@ -9,6 +9,12 @@
 	lat = 32.7157;
 	zoom = 11;
 	//test data
+	let csvData
+	d3.csv('/data/ARJIS_Public_Crime_Data_w__Day_of_Week_20240215.csv').then(data => {
+		csvData = data
+	});
+	console.log(csvData)
+	
 	const dataPoints = [
       { coordinates: [-117.1611, 32.7157], title: "Point 1", type: "Theft", date: "2024-02-17", description: "Details about the crime" },
       { coordinates: [-117.1701, 32.7105], title: "Point 2", type: "Assault", date: "2024-02-18", description: "Details about the crime" },
@@ -35,7 +41,7 @@
 			maxZoom: 18,
 		});
 
-		dataPoints.forEach(point => {
+		csvData.forEach(point => {
 		const marker = new mapboxgl.Marker({
 			color: crimeColors[point.type] || 'gray', // Default to gray if no color is defined
 		})
@@ -56,38 +62,14 @@
 </script>
 
 <main>
-	<div class =legend>
-		Longitude: {lng.toFixed(4)} | Latitude: {lat.toFixed(4)} | Zoom: {zoom.toFixed(2)}
-	</div>
-	<div class="map-wrap">
-		<div class="map" bind:this={mapContainer} />
-	  </div>
 	  
 
 </main>
 
 <style>
-	.map {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	}
-	.sidebar {
-	background-color: rgb(35 55 75 / 90%);
-	color: #fff;
-	padding: 6px 12px;
-	font-family: monospace;
-	z-index: 1;
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin: 12px;
-	border-radius: 4px;
-	}
 
 
 
-
-  </style>
+</style>
 
 
