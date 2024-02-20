@@ -139,7 +139,7 @@
   
 
   
-  <!-- <main> -->
+  <main>
 	<!-- <div id="map"></div> -->
 	{#if !isHidden}
 		<div id = "hidden">
@@ -177,7 +177,16 @@
 	  </label>
 	</div>
 
-  <!-- </main> -->
+	<div id = "writeup" >
+		<h2>Write Up</h2>
+		<p>
+			- A rationale for your design decisions. How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?
+		</p>
+		<p>	
+			- An overview of your development process. Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?
+		</p>
+	</div>
+  </main>
   
   <!-- <style>
 	#map {

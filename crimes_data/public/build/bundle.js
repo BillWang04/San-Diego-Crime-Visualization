@@ -493,7 +493,7 @@ var app = (function (d3) {
     			div = element("div");
     			div.textContent = "There is No Data For This Time Period";
     			attr_dev(div, "id", "hidden");
-    			add_location(div, file, 144, 2, 3605);
+    			add_location(div, file, 144, 2, 3596);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -526,7 +526,7 @@ var app = (function (d3) {
     			t = text(t_value);
     			option.__value = /*crimeCategory*/ ctx[20];
     			option.value = option.__value;
-    			add_location(option, file, 155, 3, 3823);
+    			add_location(option, file, 155, 3, 3814);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -561,7 +561,7 @@ var app = (function (d3) {
     			t = text(t_value);
     			option.__value = /*month*/ ctx[17];
     			option.value = option.__value;
-    			add_location(option, file, 164, 3, 4073);
+    			add_location(option, file, 164, 3, 4064);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -596,7 +596,7 @@ var app = (function (d3) {
     			t = text(t_value);
     			option.__value = /*year*/ ctx[14];
     			option.value = option.__value;
-    			add_location(option, file, 173, 3, 4289);
+    			add_location(option, file, 173, 3, 4280);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -620,8 +620,9 @@ var app = (function (d3) {
     }
 
     function create_fragment(ctx) {
+    	let main;
     	let t0;
-    	let div;
+    	let div0;
     	let label0;
     	let t1;
     	let select0;
@@ -633,6 +634,13 @@ var app = (function (d3) {
     	let label2;
     	let t5;
     	let select2;
+    	let t6;
+    	let div1;
+    	let h2;
+    	let t8;
+    	let p0;
+    	let t10;
+    	let p1;
     	let mounted;
     	let dispose;
     	let if_block = !/*isHidden*/ ctx[0] && create_if_block(ctx);
@@ -662,9 +670,10 @@ var app = (function (d3) {
 
     	const block = {
     		c: function create() {
+    			main = element("main");
     			if (if_block) if_block.c();
     			t0 = space();
-    			div = element("div");
+    			div0 = element("div");
     			label0 = element("label");
     			t1 = text("Crime:\n\t\t");
     			select0 = element("select");
@@ -691,26 +700,43 @@ var app = (function (d3) {
     				each_blocks[i].c();
     			}
 
+    			t6 = space();
+    			div1 = element("div");
+    			h2 = element("h2");
+    			h2.textContent = "Write Up";
+    			t8 = space();
+    			p0 = element("p");
+    			p0.textContent = "- A rationale for your design decisions. How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?";
+    			t10 = space();
+    			p1 = element("p");
+    			p1.textContent = "- An overview of your development process. Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?";
     			if (/*selectedCrime*/ ctx[1] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[5].call(select0));
-    			add_location(select0, file, 153, 2, 3730);
-    			add_location(label0, file, 151, 3, 3711);
+    			add_location(select0, file, 153, 2, 3721);
+    			add_location(label0, file, 151, 3, 3702);
     			if (/*selectedMonth*/ ctx[2] === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[6].call(select1));
-    			add_location(select1, file, 162, 2, 3939);
-    			add_location(label1, file, 160, 3, 3920);
+    			add_location(select1, file, 162, 2, 3930);
+    			add_location(label1, file, 160, 3, 3911);
     			if (/*selectedYear*/ ctx[3] === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[7].call(select2));
-    			add_location(select2, file, 171, 2, 4172);
-    			add_location(label2, file, 169, 3, 4154);
-    			attr_dev(div, "id", "ui-elements");
-    			add_location(div, file, 149, 1, 3684);
+    			add_location(select2, file, 171, 2, 4163);
+    			add_location(label2, file, 169, 3, 4145);
+    			attr_dev(div0, "id", "ui-elements");
+    			add_location(div0, file, 149, 1, 3675);
+    			add_location(h2, file, 180, 2, 4387);
+    			add_location(p0, file, 181, 2, 4407);
+    			add_location(p1, file, 184, 2, 4628);
+    			attr_dev(div1, "id", "writeup");
+    			add_location(div1, file, 179, 1, 4363);
+    			add_location(main, file, 141, 2, 3539);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			if (if_block) if_block.m(target, anchor);
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, div, anchor);
-    			append_dev(div, label0);
+    			insert_dev(target, main, anchor);
+    			if (if_block) if_block.m(main, null);
+    			append_dev(main, t0);
+    			append_dev(main, div0);
+    			append_dev(div0, label0);
     			append_dev(label0, t1);
     			append_dev(label0, select0);
 
@@ -721,8 +747,8 @@ var app = (function (d3) {
     			}
 
     			select_option(select0, /*selectedCrime*/ ctx[1], true);
-    			append_dev(div, t2);
-    			append_dev(div, label1);
+    			append_dev(div0, t2);
+    			append_dev(div0, label1);
     			append_dev(label1, t3);
     			append_dev(label1, select1);
 
@@ -733,8 +759,8 @@ var app = (function (d3) {
     			}
 
     			select_option(select1, /*selectedMonth*/ ctx[2], true);
-    			append_dev(div, t4);
-    			append_dev(div, label2);
+    			append_dev(div0, t4);
+    			append_dev(div0, label2);
     			append_dev(label2, t5);
     			append_dev(label2, select2);
 
@@ -745,6 +771,13 @@ var app = (function (d3) {
     			}
 
     			select_option(select2, /*selectedYear*/ ctx[3], true);
+    			append_dev(main, t6);
+    			append_dev(main, div1);
+    			append_dev(div1, h2);
+    			append_dev(div1, t8);
+    			append_dev(div1, p0);
+    			append_dev(div1, t10);
+    			append_dev(div1, p1);
 
     			if (!mounted) {
     				dispose = [
@@ -761,7 +794,7 @@ var app = (function (d3) {
     				if (if_block) ; else {
     					if_block = create_if_block(ctx);
     					if_block.c();
-    					if_block.m(t0.parentNode, t0);
+    					if_block.m(main, t0);
     				}
     			} else if (if_block) {
     				if_block.d(1);
@@ -855,9 +888,8 @@ var app = (function (d3) {
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (if_block) if_block.d(detaching);
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(main);
+    			if (if_block) if_block.d();
     			destroy_each(each_blocks_2, detaching);
     			destroy_each(each_blocks_1, detaching);
     			destroy_each(each_blocks, detaching);
