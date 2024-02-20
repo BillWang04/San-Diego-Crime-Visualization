@@ -57,9 +57,55 @@
 		style: "mapbox://styles/mapbox/dark-v11",
 		center: [lng, lat],
 		zoom: zoom, // starting zoom level
-		minZoom: 11,
+		minZoom: 8,
 		maxZoom: 18,
 	  });
+
+
+	//   map.on('load', () => {
+	// 	map.addSource('city_communities', {
+	// 		type: "geojson",
+	// 		data: "/data/san_diego_city.geojson"
+	// 	})
+	// 	map.addLayer({
+	// 		'id': 'local-layer',
+	// 		'type': 'fill',
+	// 		'source': 'city_communities',
+	// 		'layout': {},
+	// 		'paint': {
+	// 			'fill-color': '#329c46',
+	// 			'fill-opacity': 0.8
+	// 			}
+    // 	});
+	// 	map.addSource('county_communities', {
+	// 		type: "geojson",
+	// 		data: "/data/san_diego_county.geojson"
+	// 	})
+	// 	map.addLayer({
+	// 		'id': 'local-layer2',
+	// 		'type': 'fill',
+	// 		'source': 'county_communities',
+	// 		'layout': {},
+	// 		'paint': {
+	// 			'fill-color': '#499c46',
+	// 			'fill-opacity': 0.8
+	// 			}
+    // 	});
+	// 	map.addSource('jurisdictions', {
+	// 		type: "geojson",
+	// 		data: "/data/Jurisdictions.geojson"
+	// 	})
+	// 	map.addLayer({
+	// 		'id': 'local-layer3',
+	// 		'type': 'fill',
+	// 		'source': 'jurisdictions',
+	// 		'layout': {},
+	// 		'paint': {
+	// 			'fill-color': '#873970',
+	// 			'fill-opacity': 0.8
+	// 			}
+    // 	});
+	//   })
   
 	  csvData.forEach(point => {
 		const marker = new mapboxgl.Marker({
