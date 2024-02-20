@@ -20,7 +20,7 @@ input {
 	cursor: pointer;
  }
 
- .overlay {
+ #ui-elements {
 	font-size: 0.9em;
 	background-color: rgba(255, 255, 255, 0.4);
 	position: absolute;
@@ -32,8 +32,8 @@ input {
 	z-index: 3;
  }
 
- label {
+ /* label {
 	font-size: 1.5em;
 	font-family: sans-serif;
 	font-weight: bold;
- }
+ } */
