@@ -468,35 +468,65 @@ var app = (function (d3) {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[13] = list[i];
+    	child_ctx[14] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[16] = list[i];
+    	child_ctx[17] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[19] = list[i];
+    	child_ctx[20] = list[i];
     	return child_ctx;
     }
 
-    // (133:4) {#each Object.keys(crimeColors) as crimeCategory}
+    // (144:1) {#if !isHidden}
+    function create_if_block(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = "There is No Data For This Time Period";
+    			attr_dev(div, "id", "hidden");
+    			add_location(div, file, 144, 2, 3605);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(144:1) {#if !isHidden}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (155:4) {#each Object.keys(crimeColors) as crimeCategory}
     function create_each_block_2(ctx) {
     	let option;
-    	let t_value = /*crimeCategory*/ ctx[19] + "";
+    	let t_value = /*crimeCategory*/ ctx[20] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			option.__value = /*crimeCategory*/ ctx[19];
+    			option.__value = /*crimeCategory*/ ctx[20];
     			option.value = option.__value;
-    			add_location(option, file, 133, 3, 3391);
+    			add_location(option, file, 155, 3, 3823);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -512,26 +542,26 @@ var app = (function (d3) {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(133:4) {#each Object.keys(crimeColors) as crimeCategory}",
+    		source: "(155:4) {#each Object.keys(crimeColors) as crimeCategory}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (142:4) {#each Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0')) as month}
+    // (164:4) {#each Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0')) as month}
     function create_each_block_1(ctx) {
     	let option;
-    	let t_value = /*month*/ ctx[16] + "";
+    	let t_value = /*month*/ ctx[17] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			option.__value = /*month*/ ctx[16];
+    			option.__value = /*month*/ ctx[17];
     			option.value = option.__value;
-    			add_location(option, file, 142, 3, 3641);
+    			add_location(option, file, 164, 3, 4073);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -547,26 +577,26 @@ var app = (function (d3) {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(142:4) {#each Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0')) as month}",
+    		source: "(164:4) {#each Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0')) as month}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (151:4) {#each Array.from({ length: 5 }, (_, i) => (2024 - i).toString()) as year}
+    // (173:4) {#each Array.from({ length: 2 }, (_, i) => (2024 - i).toString()) as year}
     function create_each_block(ctx) {
     	let option;
-    	let t_value = /*year*/ ctx[13] + "";
+    	let t_value = /*year*/ ctx[14] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text(t_value);
-    			option.__value = /*year*/ ctx[13];
+    			option.__value = /*year*/ ctx[14];
     			option.value = option.__value;
-    			add_location(option, file, 151, 3, 3857);
+    			add_location(option, file, 173, 3, 4289);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -582,7 +612,7 @@ var app = (function (d3) {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(151:4) {#each Array.from({ length: 5 }, (_, i) => (2024 - i).toString()) as year}",
+    		source: "(173:4) {#each Array.from({ length: 2 }, (_, i) => (2024 - i).toString()) as year}",
     		ctx
     	});
 
@@ -590,21 +620,23 @@ var app = (function (d3) {
     }
 
     function create_fragment(ctx) {
+    	let t0;
     	let div;
     	let label0;
-    	let t0;
-    	let select0;
     	let t1;
-    	let label1;
+    	let select0;
     	let t2;
-    	let select1;
+    	let label1;
     	let t3;
-    	let label2;
+    	let select1;
     	let t4;
+    	let label2;
+    	let t5;
     	let select2;
     	let mounted;
     	let dispose;
-    	let each_value_2 = Object.keys(/*crimeColors*/ ctx[3]);
+    	let if_block = !/*isHidden*/ ctx[0] && create_if_block(ctx);
+    	let each_value_2 = Object.keys(/*crimeColors*/ ctx[4]);
     	validate_each_argument(each_value_2);
     	let each_blocks_2 = [];
 
@@ -620,7 +652,7 @@ var app = (function (d3) {
     		each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
     	}
 
-    	let each_value = Array.from({ length: 5 }, func_1);
+    	let each_value = Array.from({ length: 2 }, func_1);
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -630,52 +662,56 @@ var app = (function (d3) {
 
     	const block = {
     		c: function create() {
+    			if (if_block) if_block.c();
+    			t0 = space();
     			div = element("div");
     			label0 = element("label");
-    			t0 = text("Crime:\n\t\t");
+    			t1 = text("Crime:\n\t\t");
     			select0 = element("select");
 
     			for (let i = 0; i < each_blocks_2.length; i += 1) {
     				each_blocks_2[i].c();
     			}
 
-    			t1 = space();
+    			t2 = space();
     			label1 = element("label");
-    			t2 = text("Month:\n\t\t");
+    			t3 = text("Month:\n\t\t");
     			select1 = element("select");
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].c();
     			}
 
-    			t3 = space();
+    			t4 = space();
     			label2 = element("label");
-    			t4 = text("Year:\n\t\t");
+    			t5 = text("Year:\n\t\t");
     			select2 = element("select");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			if (/*selectedCrime*/ ctx[0] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[4].call(select0));
-    			add_location(select0, file, 131, 2, 3298);
-    			add_location(label0, file, 129, 3, 3279);
-    			if (/*selectedMonth*/ ctx[1] === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[5].call(select1));
-    			add_location(select1, file, 140, 2, 3507);
-    			add_location(label1, file, 138, 3, 3488);
-    			if (/*selectedYear*/ ctx[2] === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[6].call(select2));
-    			add_location(select2, file, 149, 2, 3740);
-    			add_location(label2, file, 147, 3, 3722);
+    			if (/*selectedCrime*/ ctx[1] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[5].call(select0));
+    			add_location(select0, file, 153, 2, 3730);
+    			add_location(label0, file, 151, 3, 3711);
+    			if (/*selectedMonth*/ ctx[2] === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[6].call(select1));
+    			add_location(select1, file, 162, 2, 3939);
+    			add_location(label1, file, 160, 3, 3920);
+    			if (/*selectedYear*/ ctx[3] === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[7].call(select2));
+    			add_location(select2, file, 171, 2, 4172);
+    			add_location(label2, file, 169, 3, 4154);
     			attr_dev(div, "id", "ui-elements");
-    			add_location(div, file, 128, 1, 3253);
+    			add_location(div, file, 149, 1, 3684);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, t0, anchor);
     			insert_dev(target, div, anchor);
     			append_dev(div, label0);
-    			append_dev(label0, t0);
+    			append_dev(label0, t1);
     			append_dev(label0, select0);
 
     			for (let i = 0; i < each_blocks_2.length; i += 1) {
@@ -684,10 +720,10 @@ var app = (function (d3) {
     				}
     			}
 
-    			select_option(select0, /*selectedCrime*/ ctx[0], true);
-    			append_dev(div, t1);
+    			select_option(select0, /*selectedCrime*/ ctx[1], true);
+    			append_dev(div, t2);
     			append_dev(div, label1);
-    			append_dev(label1, t2);
+    			append_dev(label1, t3);
     			append_dev(label1, select1);
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
@@ -696,10 +732,10 @@ var app = (function (d3) {
     				}
     			}
 
-    			select_option(select1, /*selectedMonth*/ ctx[1], true);
-    			append_dev(div, t3);
+    			select_option(select1, /*selectedMonth*/ ctx[2], true);
+    			append_dev(div, t4);
     			append_dev(div, label2);
-    			append_dev(label2, t4);
+    			append_dev(label2, t5);
     			append_dev(label2, select2);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -708,21 +744,32 @@ var app = (function (d3) {
     				}
     			}
 
-    			select_option(select2, /*selectedYear*/ ctx[2], true);
+    			select_option(select2, /*selectedYear*/ ctx[3], true);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(select0, "change", /*select0_change_handler*/ ctx[4]),
-    					listen_dev(select1, "change", /*select1_change_handler*/ ctx[5]),
-    					listen_dev(select2, "change", /*select2_change_handler*/ ctx[6])
+    					listen_dev(select0, "change", /*select0_change_handler*/ ctx[5]),
+    					listen_dev(select1, "change", /*select1_change_handler*/ ctx[6]),
+    					listen_dev(select2, "change", /*select2_change_handler*/ ctx[7])
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*Object, crimeColors*/ 8) {
-    				each_value_2 = Object.keys(/*crimeColors*/ ctx[3]);
+    			if (!/*isHidden*/ ctx[0]) {
+    				if (if_block) ; else {
+    					if_block = create_if_block(ctx);
+    					if_block.c();
+    					if_block.m(t0.parentNode, t0);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (dirty & /*Object, crimeColors*/ 16) {
+    				each_value_2 = Object.keys(/*crimeColors*/ ctx[4]);
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -745,8 +792,8 @@ var app = (function (d3) {
     				each_blocks_2.length = each_value_2.length;
     			}
 
-    			if (dirty & /*selectedCrime, Object, crimeColors*/ 9) {
-    				select_option(select0, /*selectedCrime*/ ctx[0]);
+    			if (dirty & /*selectedCrime, Object, crimeColors*/ 18) {
+    				select_option(select0, /*selectedCrime*/ ctx[1]);
     			}
 
     			if (dirty & /*Array*/ 0) {
@@ -773,12 +820,12 @@ var app = (function (d3) {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*selectedMonth, Array*/ 2) {
-    				select_option(select1, /*selectedMonth*/ ctx[1]);
+    			if (dirty & /*selectedMonth, Array*/ 4) {
+    				select_option(select1, /*selectedMonth*/ ctx[2]);
     			}
 
     			if (dirty & /*Array*/ 0) {
-    				each_value = Array.from({ length: 5 }, func_1);
+    				each_value = Array.from({ length: 2 }, func_1);
     				validate_each_argument(each_value);
     				let i;
 
@@ -801,13 +848,15 @@ var app = (function (d3) {
     				each_blocks.length = each_value.length;
     			}
 
-    			if (dirty & /*selectedYear, Array*/ 4) {
-    				select_option(select2, /*selectedYear*/ ctx[2]);
+    			if (dirty & /*selectedYear, Array*/ 8) {
+    				select_option(select2, /*selectedYear*/ ctx[3]);
     			}
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(t0);
     			if (detaching) detach_dev(div);
     			destroy_each(each_blocks_2, detaching);
     			destroy_each(each_blocks_1, detaching);
@@ -838,6 +887,7 @@ var app = (function (d3) {
     	lng = -117.1611;
     	lat = 32.7157;
     	zoom = 9;
+    	let isHidden = true;
     	let selectedCrime = "ASSAULT";
     	let selectedMonth = "02";
     	let selectedYear = "2024";
@@ -902,6 +952,18 @@ var app = (function (d3) {
     			return point.Crime_Category === selectedCrime && crimeMonth.toString().padStart(2, '0') === selectedMonth && crimeYear === selectedYear;
     		});
 
+    		if (Number(selectedYear) === 2023 & Number(selectedMonth) < 8) {
+    			$$invalidate(0, isHidden = false);
+    		} else if (Number(selectedYear) === 2024 & Number(selectedMonth) > 2) {
+    			$$invalidate(0, isHidden = false);
+    		} else {
+    			$$invalidate(0, isHidden = true);
+    		}
+
+    		console.log(isHidden);
+    		console.log(selectedYear);
+    		console.log(selectedMonth);
+
     		filteredData.forEach(point => {
     			new mapboxgl.Marker({
     					color: crimeColors[point.Crime_Category] || 'gray'
@@ -942,18 +1004,18 @@ var app = (function (d3) {
 
     	function select0_change_handler() {
     		selectedCrime = select_value(this);
-    		$$invalidate(0, selectedCrime);
-    		$$invalidate(3, crimeColors);
+    		$$invalidate(1, selectedCrime);
+    		$$invalidate(4, crimeColors);
     	}
 
     	function select1_change_handler() {
     		selectedMonth = select_value(this);
-    		$$invalidate(1, selectedMonth);
+    		$$invalidate(2, selectedMonth);
     	}
 
     	function select2_change_handler() {
     		selectedYear = select_value(this);
-    		$$invalidate(2, selectedYear);
+    		$$invalidate(3, selectedYear);
     	}
 
     	$$self.$capture_state = () => ({
@@ -963,6 +1025,7 @@ var app = (function (d3) {
     		lng,
     		lat,
     		zoom,
+    		isHidden,
     		selectedCrime,
     		selectedMonth,
     		selectedYear,
@@ -976,9 +1039,10 @@ var app = (function (d3) {
     		if ('lng' in $$props) lng = $$props.lng;
     		if ('lat' in $$props) lat = $$props.lat;
     		if ('zoom' in $$props) zoom = $$props.zoom;
-    		if ('selectedCrime' in $$props) $$invalidate(0, selectedCrime = $$props.selectedCrime);
-    		if ('selectedMonth' in $$props) $$invalidate(1, selectedMonth = $$props.selectedMonth);
-    		if ('selectedYear' in $$props) $$invalidate(2, selectedYear = $$props.selectedYear);
+    		if ('isHidden' in $$props) $$invalidate(0, isHidden = $$props.isHidden);
+    		if ('selectedCrime' in $$props) $$invalidate(1, selectedCrime = $$props.selectedCrime);
+    		if ('selectedMonth' in $$props) $$invalidate(2, selectedMonth = $$props.selectedMonth);
+    		if ('selectedYear' in $$props) $$invalidate(3, selectedYear = $$props.selectedYear);
     		if ('csvData' in $$props) csvData = $$props.csvData;
     	};
 
@@ -987,6 +1051,7 @@ var app = (function (d3) {
     	}
 
     	return [
+    		isHidden,
     		selectedCrime,
     		selectedMonth,
     		selectedYear,

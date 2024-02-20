@@ -8,6 +8,7 @@
 	lat = 32.7157;
 	zoom = 9;
 
+	let isHidden = true;
 	let selectedCrime = "ASSAULT";
 	let selectedMonth = "02"; 
 	let selectedYear = "2024";
@@ -81,6 +82,21 @@
       );
     });
 
+
+		if ((Number( selectedYear ) === 2023) & (Number(selectedMonth) < 8)){
+			isHidden = false;
+		}
+		else if ((Number(selectedYear) === 2024) & (Number(selectedMonth) > 2)){
+			isHidden = false;
+		}
+		else{
+			isHidden = true;
+		}
+		console.log(isHidden)
+		console.log(selectedYear)
+		console.log(selectedMonth)
+
+
 		filteredData.forEach(point => {
 		const marker = new mapboxgl.Marker({
 			color: crimeColors[point.Crime_Category] || 'gray',
@@ -99,7 +115,6 @@
 			console.log('Map clicked at:', e.lngLat);
 		});
 	};
-
 
   
 	// Use await within an async context
@@ -126,7 +141,14 @@
   
   <!-- <main> -->
 	<!-- <div id="map"></div> -->
+	{#if !isHidden}
+		<div id = "hidden">
+			There is No Data For This Time Period
+		</div>
+	{/if}
+
 	<div id="ui-elements">
+
 	  <label>
 		Crime:
 		<select bind:value={selectedCrime}>
@@ -148,7 +170,7 @@
 	  <label>
 		Year:
 		<select bind:value={selectedYear}>
-		  {#each Array.from({ length: 5 }, (_, i) => (2024 - i).toString()) as year}
+		  {#each Array.from({ length: 2 }, (_, i) => (2024 - i).toString()) as year}
 			<option value={year}>{year}</option>
 		  {/each}
 		</select>
