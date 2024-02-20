@@ -1,26 +1,38 @@
 <script>
 	import { onMount } from "svelte";
-	import "../node_modules/mapbox-gl/dist/mapbox-gl.css";
+	import { afterUpdate } from 'svelte';
 	import * as d3 from "d3";
   
 	let lng, lat, zoom;
 	lng = -117.1611;
 	lat = 32.7157;
-	zoom = 11;
+	zoom = 9;
+
+	let selectedCrime = "ASSAULT";
+	let selectedMonth = "02"; 
+	let selectedYear = "2024";
   
-	// Test data
 	let csvData;
-  
-	const dataPoints = [
-	  { coordinates: [-117.1611, 32.7157], title: "Point 1", type: "Theft", date: "2024-02-17", description: "Details about the crime" },
-	  { coordinates: [-117.1701, 32.7105], title: "Point 2", type: "Assault", date: "2024-02-18", description: "Details about the crime" },
-	];
   
 	// Colors of categories
 	const crimeColors = {
-	  Theft: 'blue',
-	  Assault: 'red',
-	};
+		"THEFT/LARCENY": "#3498db",     // Blue
+		"DUI": "#e74c3c",               // Red
+		"ROBBERY": "#e67e22",           // Orange
+		"BURGLARY": "#9b59b6",          // Purple
+		"VANDALISM": "#2ecc71",         // Green
+		"FRAUD": "#f1c40f",             // Yellow
+		"ASSAULT": "#e91e63",           // Pink
+		"VEHICLE BREAK-IN/THEFT": "#00bcd4", // Cyan
+		"DRUGS/ALCOHOL VIOLATIONS": "#d35400", // Brown
+		"ARSON": "#1abc9c",             // Teal
+		"MOTOR VEHICLE THEFT": "#303f9f",  // Indigo
+		"SEX CRIMES": "#800000",        // Maroon
+		"WEAPONS": "#95a5a6",           // Gray
+		"HOMICIDE": "#000000",          // Black
+};
+
+
   
 	async function fetchData() {
 		try {
@@ -36,52 +48,132 @@
 					row.coordinates = [parseFloat(longitude), parseFloat(latitude)];
 				}
 				return row;
-			})
-			.slice(0,100);
+			});
 	  } catch (error) {
 		console.error('Error loading CSV:', error);
 	  }
 	}
+
+
+	async function updatemap(){
+
+
+		mapboxgl.accessToken = "pk.eyJ1IjoiYmx3MDAyIiwiYSI6ImNsc21kam9xcTBtaHQycXBkNGVudTZmNXAifQ.Zxv8Wui2RBVxFDRB0mbvMw";
+			
+		const map = new mapboxgl.Map({
+			container: "map",
+			style: "mapbox://styles/mapbox/streets-v12",
+			center: [lng, lat],
+			zoom: zoom, // starting zoom level
+			minZoom: 8,
+			maxZoom: 20,
+		});	
+
+		const filteredData = csvData.filter(point => {
+			const crimeDate = new Date(point.Date);
+			const crimeMonth = crimeDate.getMonth() + 1; // Months are zero-indexed
+			const crimeYear = crimeDate.getFullYear().toString();
+
+		return (
+			point.Crime_Category === selectedCrime &&
+			crimeMonth.toString().padStart(2, '0') === selectedMonth &&
+			crimeYear === selectedYear
+      );
+    });
+
+		filteredData.forEach(point => {
+		const marker = new mapboxgl.Marker({
+			color: crimeColors[point.Crime_Category] || 'gray',
+		})
+			.setLngLat(point.coordinates)
+			.setPopup(new mapboxgl.Popup().setHTML(`
+			<h3>${point.Agency}</h3>
+			<p><strong>Type:</strong> ${point.Crime_Category}</p>
+			<p><strong>Date:</strong> ${point.Date}</p>
+			<p><strong>Description:</strong> ${point.Charge_Description}</p>
+			`))
+			.addTo(map);
+		});
+
+		map.on('click', (e) => {
+			console.log('Map clicked at:', e.lngLat);
+		});
+	};
+
+
   
 	// Use await within an async context
 	onMount(async () => {
 	  // Assign the result of fetchData to csvData
-	  csvData = await fetchData();
-	  console.log(csvData);
-  
-	  // Continue with the rest of your map initialization and data processing
-	  mapboxgl.accessToken = "pk.eyJ1IjoiYmx3MDAyIiwiYSI6ImNsc21kam9xcTBtaHQycXBkNGVudTZmNXAifQ.Zxv8Wui2RBVxFDRB0mbvMw";
-  
-	  const map = new mapboxgl.Map({
-		container: "map",
-		style: "mapbox://styles/mapbox/dark-v11",
-		center: [lng, lat],
-		zoom: zoom, // starting zoom level
-		minZoom: 11,
-		maxZoom: 18,
-	  });
-  
-	  csvData.forEach(point => {
-		const marker = new mapboxgl.Marker({
-		  color: crimeColors[point.Crime] || 'gray', // Default to gray if no color is defined
-		})
-		  .setLngLat(point.coordinates)
-		  .setPopup(new mapboxgl.Popup().setHTML(`
-		  <h3>${point.Agency}</h3>
-		  <p><strong>Type:</strong> ${point.Crime_Category}</p>
-		  <p><strong>Date:</strong> ${point.Date}</p>
-		  <p><strong>Description:</strong> ${point.Charge_Description}</p>
-		  `))
-		  .addTo(map);
-	  });
+
+		// Initial data load
+		try {
+		csvData = await fetchData();
+		updatemap();
+		} catch (error) {
+		console.error('Error loading CSV data:', error);
+		}
+		
 	});
+
+	afterUpdate(() => {
+    	updatemap();
+  	});
+
   </script>
   
-  <main>
 
-
-  </main>
   
-  <style>
-  </style>
+  <!-- <main> -->
+	<!-- <div id="map"></div> -->
+	<div id="ui-elements">
+	  <label>
+		Crime:
+		<select bind:value={selectedCrime}>
+		  {#each Object.keys(crimeColors) as crimeCategory}
+			<option value={crimeCategory}>{crimeCategory}</option>
+		  {/each}
+		</select>
+	  </label>
+  
+	  <label>
+		Month:
+		<select bind:value={selectedMonth}>
+		  {#each Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0')) as month}
+			<option value={month}>{month}</option>
+		  {/each}
+		</select>
+	  </label>
+  
+	  <label>
+		Year:
+		<select bind:value={selectedYear}>
+		  {#each Array.from({ length: 5 }, (_, i) => (2024 - i).toString()) as year}
+			<option value={year}>{year}</option>
+		  {/each}
+		</select>
+	  </label>
+	</div>
+
+  <!-- </main> -->
+  
+  <!-- <style>
+	#map {
+	  height: 90vh; /* Use viewport height for better responsiveness */
+	  width: 100%;
+	  position: absolute;
+	}
+  
+	#ui-elements {
+	  position: relative;
+	  top: 10px;
+	  left: 10px;
+	  z-index: 1;
+	  background: white;
+	  padding: 10px;
+	  border-radius: 5px;
+	  pointer-events: auto; /* Allow pointer events on UI elements */
+	}
+  </style> -->
+
   
