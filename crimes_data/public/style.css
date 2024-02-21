@@ -49,12 +49,20 @@ input {
     background-color: rgba(255, 255, 255, 0.4);
     position: absolute;
     margin: auto;
-    min-width: 250px;
-    width: 15%;
-    bottom: 10px; /* Adjust this value as needed */
+    /* min-width: 250px;
+    width: ; */
+	max-width: 400px;
+    bottom: 30px; /* Adjust this value as needed */
     left: 10px;   /* Adjust this value as needed */
     padding: 10px;
     z-index: 3;
+	float:  left;
+	clear: left;
+}
+
+#writeup-text {
+	max-height: 200px;
+	overflow-y:auto;
 }
 
 
